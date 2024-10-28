@@ -35,9 +35,7 @@ export const ResultsTable = ({teamId, isDemo}: TableProps) => {
 
   return (
     <table
-      className={`tw-w-full tw-table-fixed tw-border-collapse ${
-        isDemo ? '@tablet:tw-table-auto' : 'tablet:tw-table-auto'
-      }`}
+      className={`tw-w-full tw-table-fixed tw-border-collapse`}
     >
       <thead className={`tw-sticky tw-top-0`}>
         <tr className={`tw-bg-th-gray tw-text-th-white tw-w-full`}>

@@ -1,6 +1,6 @@
 {
   "name": "@devtronaut/tablehub-component",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "The library for the tablehub component, providing the ranking, results and upcoming games tables.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",

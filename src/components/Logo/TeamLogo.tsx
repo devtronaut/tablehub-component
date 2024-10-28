@@ -10,7 +10,7 @@ export const TeamLogo = ({ src }: TeamLogoProps) => {
       {src ? (
         <img
           src={src}
-          className="tw-h-full tw-rounded-full"
+          className="tw-h-full tw-max-w-none tw-object-cover tw-rounded-full"
         />
       ) : (
         <VolleyballIcon />

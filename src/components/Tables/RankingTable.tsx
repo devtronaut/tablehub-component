@@ -25,22 +25,20 @@ export const RankingTable = ({ teamId, teamName, isDemo }: TableProps) => {
 
   return (
     <table
-      className={`tw-w-full tw-table-fixed tw-border-collapse ${
-        isDemo ? `@tablet:tw-table-auto` : `tablet:tw-table-auto`
-      }`}
+      className={`tw-w-full tw-table-fixed tw-border-collapse`}
     >
       <thead className={`tw-sticky tw-top-0`}>
         <tr className={`tw-bg-th-gray tw-text-th-white`}>
           <th
             className={`tw-text-center tw-py-1 tw-w-20 ${
-              isDemo ? `@phone:tw-w-auto` : `phone:tw-w-auto`
+              isDemo ? `@tablet:tw-w-auto` : `tablet:tw-w-auto`
             }`}
           >
             RANG
           </th>
           <th className={`tw-text-left tw-py-1`}>TEAM</th>
           <th
-            className={`tw-text-center tw-py-1 tw-hidden ${
+            className={`tw-text-center tw-py-1 tw-hidden tw-w-fit ${
               isDemo ? `@phone:tw-table-cell` : `phone:tw-table-cell`
             }`}
           >
@@ -55,7 +53,7 @@ export const RankingTable = ({ teamId, teamName, isDemo }: TableProps) => {
           </th>
           <th
             className={`tw-text-center tw-py-1 tw-w-24 ${
-              isDemo ? `@phone:tw-w-auto` : `phone:tw-w-auto`
+              isDemo ? `@tablet:tw-w-auto` : `tablet:tw-w-auto`
             }`}
           >
             PUNKTE
@@ -103,7 +101,9 @@ const RankingTableRow = ({
       <td
         className={`tw-th-whitespace-nowrap tw-overflow-hidden tw-text-ellipsis tw-py-1`}
       >
-        <div className={`tw-h-8 tw-flex tw-flex-row tw-items-center tw-gap-2 tw-text-nowrap`}>
+        <div
+          className={`tw-h-8 tw-flex tw-flex-row tw-items-center tw-gap-2 tw-text-nowrap`}
+        >
           <TeamLogo src={team.teamLogoUrl} />
           <TextContent text={team.teamCaption} bold={isHomeTeam} />
         </div>

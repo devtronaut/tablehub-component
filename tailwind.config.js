@@ -34,7 +34,7 @@ module.exports = {
         'th-roundedTabLeftPassive': '0 10px 0 0 rgba(122,122,122,1.0)',
       },
       containers: {
-        phone: '28rem',
+        phone: '35rem',
         tablet: '48rem',
       },
     },

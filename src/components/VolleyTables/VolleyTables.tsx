@@ -61,7 +61,7 @@ const Tables = ({teamId, teamName, isDemo = false}: TableProps) => {
           />
         </div>
 
-        <div className="tw-@container tw-max-w-[47rem] tw-bg-th-white tw-rounded-md tw-rounded-tl-none tw-max-h-[550px] tw-overflow-y-auto tw-shadow">
+        <div className="tw-@container tw-w-full tw-bg-th-white tw-rounded-md tw-rounded-tl-none tw-max-h-[550px] tw-overflow-y-auto tw-shadow">
           {isRanking && (
             <RankingTable teamId={teamId} teamName={teamName} isDemo={isDemo} />
           )}

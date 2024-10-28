@@ -1,5 +1,5 @@
 import './style.css';
 
-import { VolleyTables } from './components/VolleyTables/VolleyTables';
+import { VolleyTables, DemoTables } from './components/VolleyTables/VolleyTables';
 
-export { VolleyTables };
+export { VolleyTables, DemoTables  };
