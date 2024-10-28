@@ -58,7 +58,7 @@ export const UpcomingGamesTable = ({ teamId, isDemo }: TableProps) => {
           />
           <GamesTableHeader
             text={`ORT`}
-            styles={`tw-w-16 tw-text-center ${
+            styles={`tw-w-12 tw-text-center ${
               isDemo ? '@phone:tw-w-auto' : 'phone:tw-w-auto'
             }`}
           />
@@ -101,7 +101,7 @@ const GamesTableRow = ({
   opponentLogoUrl,
   isDemo
 }: GamesTableRowProps) => {
-  const [long, short, time] = useDateTransformer(dateUtc);
+  const [long, short, shortTwoDigitYear, time] = useDateTransformer(dateUtc);
   const mapsLink = useMapsLinkTransformer(location.plusCode);
 
   return (
@@ -117,11 +117,18 @@ const GamesTableRow = ({
           {long}
         </div>
         <div
-          className={`tw-w-full tw-text-center tw-block ${
-            isDemo ? '@tablet:tw-hidden' : 'tablet:tw-hidden'
+          className={`tw-w-full tw-text-center tw-hidden ${
+            isDemo ? '@tablet:tw-hidden' : 'phone:tw-block tablet:tw-hidden'
           }`}
         >
           {short}
+        </div>
+        <div
+          className={`tw-w-full tw-text-center tw-block ${
+            isDemo ? '@tablet:tw-hidden' : 'phone-small:tw-block tablet:hidden'
+          }`}
+        >
+          {shortTwoDigitYear}
         </div>
         {`${time} Uhr`}
       </td>

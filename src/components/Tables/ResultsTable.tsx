@@ -34,12 +34,16 @@ export const ResultsTable = ({teamId, isDemo}: TableProps) => {
   const maxPlayedSets = Math.max(...results.results.map((r) => r.winner.sets.length));
 
   return (
-    <table
-      className={`tw-w-full tw-table-fixed tw-border-collapse`}
-    >
+    <table className={`tw-w-full tw-table-fixed tw-border-collapse`}>
       <thead className={`tw-sticky tw-top-0`}>
         <tr className={`tw-bg-th-gray tw-text-th-white tw-w-full`}>
-          <th className={`tw-text-center tw-py-1`}>DATUM</th>
+          <th
+            className={`tw-text-center tw-py-1 tw-w-24 ${
+              isDemo ? '@tablet:tw-w-auto' : 'tablet:tw-w-auto'
+            }`}
+          >
+            DATUM
+          </th>
           <th
             className={`tw-text-center tw-py-1 tw-hidden ${
               isDemo ? '@phone:tw-table-cell' : 'phone:tw-table-cell'
@@ -48,7 +52,13 @@ export const ResultsTable = ({teamId, isDemo}: TableProps) => {
             MODUS
           </th>
           <th className={`tw-text-center tw-py-1`}>TEAMS</th>
-          <th className={`tw-text-center tw-py-1`}>SÄTZE</th>
+          <th
+            className={`tw-text-center tw-py-1 tw-w-20 ${
+              isDemo ? '@tablet:tw-w-auto' : 'tablet:tw-w-auto'
+            }`}
+          >
+            SÄTZE
+          </th>
           <th
             colSpan={maxPlayedSets}
             className={`tw-text-left tw-py-1 tw-hidden ${

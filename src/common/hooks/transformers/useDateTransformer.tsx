@@ -1,6 +1,6 @@
 export const useDateTransformer = (
   utcString: string
-): [string, string, string] => {
+): [string, string, string, string] => {
   const LOCALE = 'de-CH';
 
   const date = new Date(Date.parse(utcString));
@@ -17,10 +17,16 @@ export const useDateTransformer = (
     day: 'numeric',
   });
 
+  const shortDateTwoDigitYear = date.toLocaleString(LOCALE, {
+    year: '2-digit',
+    month: 'numeric',
+    day: 'numeric',
+  });
+
   const time = date.toLocaleString(LOCALE, {
     hour: '2-digit',
     minute: '2-digit',
   });
 
-  return [longDate, shortDate, time];
+  return [longDate, shortDate, shortDateTwoDigitYear, time];
 };
