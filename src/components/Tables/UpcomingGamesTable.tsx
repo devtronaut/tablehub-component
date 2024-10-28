@@ -12,7 +12,7 @@ import { useDateTransformer } from '../../common/hooks/transformers/useDateTrans
 import { useMapsLinkTransformer } from '../../common/hooks/transformers/useMapsLinkTransformer';
 import { TeamLogo } from '../Logo/TeamLogo';
 
-export const UpcomingGamesTable = ({ teamId }: TableProps) => {
+export const UpcomingGamesTable = ({ teamId, isDemo }: TableProps) => {
   const [loading, games, error] = useUpcomingGamesApi(teamId);
 
   if (error) {
@@ -31,30 +31,42 @@ export const UpcomingGamesTable = ({ teamId }: TableProps) => {
   }
 
   return (
-    <table className="tw-w-full tw-table-fixed tablet:tw-table-auto @tablet:tw-table-auto tw-border-collapse">
-      <thead className="tw-sticky tw-top-0">
-        <tr className="tw-bg-th-gray tw-text-th-white">
+    <table
+      className={`tw-w-full tw-table-fixed tablet:tw-table-auto @tablet:tw-table-auto tw-border-collapse ${
+        isDemo ? '' : ''
+      }`}
+    >
+      <thead className={`tw-sticky tw-top-0`}>
+        <tr className={`tw-bg-th-gray tw-text-th-white`}>
           <GamesTableHeader
-            text="DATUM"
-            styles="tw-w-24 phone:tw-w-auto @phone:tw-w-auto tw-text-center"
+            text={`DATUM`}
+            styles={`tw-w-24 tw-text-center ${
+              isDemo ? '@phone:tw-w-auto' : 'phone:tw-w-auto'
+            }`}
           />
           <GamesTableHeader
-            text="GEGNER"
-            styles="tw-text-center phone:tw-text-left @phone:tw-text-left"
+            text={`GEGNER`}
+            styles={`tw-text-center ${
+              isDemo ? '@phone:tw-text-left' : 'phone:tw-text-left'
+            }`}
           />
           <GamesTableHeader
-            text="TYP"
-            styles="tw-hidden tablet:tw-table-cell @tablet:tw-table-cell tw-text-center"
+            text={`TYP`}
+            styles={`tw-hidden tw-text-center ${
+              isDemo ? '@tablet:tw-table-cell' : 'tablet:tw-table-cell'
+            }`}
           />
           <GamesTableHeader
-            text="ORT"
-            styles="tw-w-16 phone:tw-w-auto @phone:tw-w-auto tw-text-center"
+            text={`ORT`}
+            styles={`tw-w-16 tw-text-center ${
+              isDemo ? '@phone:tw-w-auto' : 'phone:tw-w-auto'
+            }`}
           />
         </tr>
       </thead>
       <tbody>
         {games.upcomingGames.map((game: UpcomingGamesSchema, index: number) => {
-          return <GamesTableRow key={index} {...game} />;
+          return <GamesTableRow key={index} {...game} isDemo={isDemo} />;
         })}
       </tbody>
     </table>
@@ -77,6 +89,7 @@ type GamesTableRowProps = {
   location: LocationSchema;
   dateUtc: string;
   opponentLogoUrl: string;
+  isDemo: boolean;
 };
 
 const GamesTableRow = ({
@@ -86,46 +99,85 @@ const GamesTableRow = ({
   location,
   dateUtc,
   opponentLogoUrl,
+  isDemo
 }: GamesTableRowProps) => {
   const [long, short, time] = useDateTransformer(dateUtc);
   const mapsLink = useMapsLinkTransformer(location.plusCode);
 
   return (
-    <tr className="tw-border-0 tw-border-y-2 tw-border-solid tw-border-th-slate-200 tw-duration-200 tw-bg-th-white hover:tw-bg-th-slate-100 even:tw-bg-th-slate-50 first:tw-border-t-0 last:tw-border-b-0">
-      <td className="tw-text-center tw-py-1">
-        <div className="tw-w-full tw-text-center tw-hidden tablet:tw-block @tablet:tw-block">
+    <tr
+      className={`tw-border-0 tw-border-y-2 tw-border-solid tw-border-th-slate-200 tw-duration-200 tw-bg-th-white hover:tw-bg-th-slate-100 even:tw-bg-th-slate-50 first:tw-border-t-0 last:tw-border-b-0`}
+    >
+      <td className={`tw-text-center tw-py-1`}>
+        <div
+          className={`tw-w-full tw-text-center tw-hidden ${
+            isDemo ? '@tablet:tw-block' : 'tablet:tw-block'
+          }`}
+        >
           {long}
         </div>
-        <div className="tw-w-full tw-text-center tw-block tablet:tw-hidden @tablet:tw-hidden">
+        <div
+          className={`tw-w-full tw-text-center tw-block ${
+            isDemo ? '@tablet:tw-hidden' : 'tablet:tw-hidden'
+          }`}
+        >
           {short}
         </div>
         {`${time} Uhr`}
       </td>
-      <td className="tw-text-center tw-py-1 tw-th-whitespace-nowrap tw-overflow-hidden tw-text-ellipsis">
-        <div className="tw-h-12 tablet:tw-h-8 @tablet:tw-h-8 tw-flex tw-flex-col phone:tw-flex-row @phone:tw-flex-row tw-items-center tw-gap-0 phone:tw-gap-2 @phone:tw-gap-2">
-          <div className="tw-h-[50%] tablet:tw-h-full @tablet:tw-h-full ">
+      <td
+        className={`tw-text-center tw-py-1 tw-th-whitespace-nowrap tw-overflow-hidden tw-text-ellipsis`}
+      >
+        <div
+          className={`tw-h-12 tw-flex tw-flex-col tw-items-center tw-gap-0 ${
+            isDemo
+              ? '@phone:tw-gap-2 @phone:tw-flex-row @tablet:tw-h-8'
+              : 'phone:tw-gap-2 phone:tw-flex-row tablet:tw-h-8'
+          }`}
+        >
+          <div
+            className={`tw-h-[50%] ${
+              isDemo ? '@tablet:tw-h-full' : 'tablet:tw-h-full'
+            }`}
+          >
             <TeamLogo src={opponentLogoUrl} />
           </div>
           {opponent}
         </div>
       </td>
-      <td className="tw-text-center tw-py-1 tw-hidden tablet:tw-table-cell @tablet:tw-table-cell">
+      <td
+        className={`tw-text-center tw-py-1 tw-hidden ${
+          isDemo ? '@tablet:tw-table-cell' : 'tablet:tw-table-cell'
+        }`}
+      >
         {mode}
         <br />
         {type}
       </td>
-      <td className="tw-text-center tw-align-middle tw-py-1 tw-text-ellipsis">
+      <td className={`tw-text-center tw-align-middle tw-py-1 tw-text-ellipsis`}>
         <a
           href={mapsLink}
           target="_blank"
-          className="tw-hidden tablet:tw-inline @tablet:tw-inline"
+          className={`tw-hidden ${
+            isDemo ? '@tablet:tw-inline' : 'tablet:tw-inline'
+          }`}
         >
           {location.caption}
         </a>
-        <div className="tw-text-balance tw-mt-1 tw-hidden tablet:tw-block @tablet:tw-block">
-          <div className="tw-th-whitespace-nowrap tw-text-center">{`${location.zip} ${location.city}`}</div>
+        <div
+          className={`tw-text-balance tw-mt-1 tw-hidden ${
+            isDemo ? '@tablet:tw-block' : 'tablet:tw-block'
+          }`}
+        >
+          <div
+            className={`tw-th-whitespace-nowrap tw-text-center`}
+          >{`${location.zip} ${location.city}`}</div>
         </div>
-        <div className="tw-h-8 tw-flex tw-flex-row tw-justify-around tablet:tw-hidden @tablet:tw-hidden">
+        <div
+          className={`tw-h-8 tw-flex tw-flex-row tw-justify-around ${
+            isDemo ? '@tablet:tw-hidden' : 'tablet:tw-hidden'
+          }`}
+        >
           <PinLink mapsLink={mapsLink} />
         </div>
       </td>

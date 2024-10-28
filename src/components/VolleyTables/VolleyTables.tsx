@@ -4,12 +4,20 @@ import { RankingTable } from '../Tables/RankingTable';
 import { UpcomingGamesTable } from '../Tables/UpcomingGamesTable';
 import { ResultsTable } from '../Tables/ResultsTable';
 
+export type TableProps = {
+  isDemo: boolean
+} & TeamProps;
+
 export type TeamProps = {
   teamId: number,
   teamName: string
 }
 
-export const VolleyTables = ({teamId, teamName}: TeamProps) => {
+export const VolleyTables = ({teamId, teamName}: TeamProps) => Tables({teamId, teamName, isDemo: false});
+export const DemoTables = ({ teamId, teamName }: TeamProps) =>
+  Tables({ teamId, teamName, isDemo: true });
+
+const Tables = ({teamId, teamName, isDemo = false}: TableProps) => {
   const [isRanking, setRanking] = useState(true);
   const [isResults, setResults] = useState(false);
   const [isUpcomingGames, setUpcomingGames] = useState(false);
@@ -53,12 +61,20 @@ export const VolleyTables = ({teamId, teamName}: TeamProps) => {
           />
         </div>
 
-        <div className="tw-@container tw-w-full tw-bg-th-white tw-rounded-md tw-rounded-tl-none tw-max-h-[550px] tw-overflow-y-auto tw-shadow">
-          {isRanking && <RankingTable teamId={teamId} teamName={teamName} />}
-          {isUpcomingGames && (
-            <UpcomingGamesTable teamId={teamId} teamName={teamName} />
+        <div className="tw-@container tw-max-w-[47rem] tw-bg-th-white tw-rounded-md tw-rounded-tl-none tw-max-h-[550px] tw-overflow-y-auto tw-shadow">
+          {isRanking && (
+            <RankingTable teamId={teamId} teamName={teamName} isDemo={isDemo} />
           )}
-          {isResults && <ResultsTable teamId={teamId} teamName={teamName} />}
+          {isUpcomingGames && (
+            <UpcomingGamesTable
+              teamId={teamId}
+              teamName={teamName}
+              isDemo={isDemo}
+            />
+          )}
+          {isResults && (
+            <ResultsTable teamId={teamId} teamName={teamName} isDemo={isDemo} />
+          )}
         </div>
       </div>
     </div>

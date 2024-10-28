@@ -4,7 +4,6 @@ const config: StorybookConfig = {
   stories: ["../src/**/*.stories.tsx"],
   addons: [
     "@storybook/addon-webpack5-compiler-swc",
-    "@storybook/addon-onboarding",
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@chromatic-com/storybook",
@@ -12,7 +11,6 @@ const config: StorybookConfig = {
     "@storybook/addon-styling-webpack",
     ({
       name: "@storybook/addon-styling-webpack",
-
       options: {
         rules: [{
           test: /\.css$/,

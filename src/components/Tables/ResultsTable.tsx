@@ -9,7 +9,7 @@ import {
 import { Spinner } from '../Loading/Spinner';
 import { Toast } from '../Toast/Toast';
 
-export const ResultsTable = ({teamId}: TableProps) => {
+export const ResultsTable = ({teamId, isDemo}: TableProps) => {
   const [loading, results, error] = useResultsApi(
     teamId
   );
@@ -34,18 +34,28 @@ export const ResultsTable = ({teamId}: TableProps) => {
   const maxPlayedSets = Math.max(...results.results.map((r) => r.winner.sets.length));
 
   return (
-    <table className="tw-w-full tw-table-fixed tablet:tw-table-auto @tablet:tw-table-auto tw-border-collapse">
-      <thead className="tw-sticky tw-top-0">
-        <tr className="tw-bg-th-gray tw-text-th-white">
-          <th className="tw-text-center tw-py-1">DATUM</th>
-          <th className="tw-text-center tw-py-1 tw-hidden phone:tw-table-cell @phone:tw-table-cell">
+    <table
+      className={`tw-w-full tw-table-fixed tw-border-collapse ${
+        isDemo ? '@tablet:tw-table-auto' : 'tablet:tw-table-auto'
+      }`}
+    >
+      <thead className={`tw-sticky tw-top-0`}>
+        <tr className={`tw-bg-th-gray tw-text-th-white tw-w-full`}>
+          <th className={`tw-text-center tw-py-1`}>DATUM</th>
+          <th
+            className={`tw-text-center tw-py-1 tw-hidden ${
+              isDemo ? '@phone:tw-table-cell' : 'phone:tw-table-cell'
+            }`}
+          >
             MODUS
           </th>
-          <th className="tw-text-center tw-py-1">TEAMS</th>
-          <th className="tw-text-center tw-py-1">SÄTZE</th>
+          <th className={`tw-text-center tw-py-1`}>TEAMS</th>
+          <th className={`tw-text-center tw-py-1`}>SÄTZE</th>
           <th
-            colSpan={5}
-            className="tw-text-left tw-py-1 tw-hidden phone:tw-table-cell @phone:tw-table-cell"
+            colSpan={maxPlayedSets}
+            className={`tw-text-left tw-py-1 tw-hidden ${
+              isDemo ? '@phone:tw-table-cell' : 'phone:tw-table-cell'
+            }`}
           >
             PUNKTE
           </th>
@@ -60,6 +70,7 @@ export const ResultsTable = ({teamId}: TableProps) => {
             dateUtc={result.dateUtc}
             mode={result.mode}
             maxPlayedSets={maxPlayedSets}
+            isDemo
           />
         );
       })}
@@ -73,6 +84,7 @@ type TableRowProps = {
   dateUtc: string;
   mode: string;
   maxPlayedSets: number;
+  isDemo: boolean;
 };
 
 const ResultTableRow = ({
@@ -81,6 +93,7 @@ const ResultTableRow = ({
   dateUtc,
   mode,
   maxPlayedSets,
+  isDemo
 }: TableRowProps) => {
   const [, short, ] = useDateTransformer(dateUtc);
 
@@ -93,12 +106,19 @@ const ResultTableRow = ({
   const [winnerSetObjects, loserSetObjects] = getSetObjects(winnerSets, loserSets);
 
   return (
-    <tbody className="tw-bg-th-white even:tw-bg-th-slate-50 hover:tw-bg-th-slate-100">
+    <tbody
+      className={`tw-bg-th-white even:tw-bg-th-slate-50 hover:tw-bg-th-slate-100`}
+    >
       <tr>
-        <td rowSpan={2} className="tw-text-center tw-py-1">
+        <td rowSpan={2} className={`tw-text-center tw-py-1`}>
           {short}
         </td>
-        <td rowSpan={2} className="tw-text-center tw-py-1 tw-hidden phone:tw-table-cell @phone:tw-table-cell">
+        <td
+          rowSpan={2}
+          className={`tw-text-center tw-py-1 tw-hidden ${
+            isDemo ? '@phone:tw-table-cell' : 'phone:tw-table-cell'
+          }`}
+        >
           {mode}
         </td>
         <TeamResultRow
@@ -106,14 +126,18 @@ const ResultTableRow = ({
           caption={winner.caption}
           setsWon={winner.setsWon}
           sets={winnerSetObjects}
+          isDemo={isDemo}
         />
       </tr>
-      <tr className="tw-border-0 tw-border-b-2 tw-border-solid tw-border-th-slate-200 hover:tw-bg-th-slate-100">
+      <tr
+        className={`tw-border-0 tw-border-b-2 tw-border-solid tw-border-th-slate-200 hover:tw-bg-th-slate-100`}
+      >
         <TeamResultRow
           isWinner={false}
           caption={loser.caption}
           setsWon={loser.setsWon}
           sets={loserSetObjects}
+          isDemo={isDemo}
         />
       </tr>
     </tbody>
@@ -129,7 +153,8 @@ type TeamResultRowProps = {
   isWinner: boolean,
   caption: string,
   setsWon: number,
-  sets: Set[]
+  sets: Set[],
+  isDemo: boolean
 }
 
 const TeamResultRow = ({
@@ -137,27 +162,34 @@ const TeamResultRow = ({
   caption,
   setsWon,
   sets,
+  isDemo
 }: TeamResultRowProps) => {
   return (
-    <>
-      <td className="tw-text-center tw-pt-1 tw-th-whitespace-nowrap tw-overflow-hidden tw-text-ellipsis">
-        {isWinner ? <strong>{caption}</strong> : caption}
+<>
+  <td className={`tw-text-center tw-pt-1 tw-th-whitespace-nowrap tw-text-nowrap tw-overflow-hidden tw-text-ellipsis`}>
+    {isWinner ? <strong>{caption}</strong> : caption}
+  </td>
+  <td className={`tw-text-center tw-pt-1`}>
+    {isWinner ? <strong>{setsWon}</strong> : setsWon}
+  </td>
+  {sets.map((set, index) => {
+    return (
+      <td
+        className={`tw-text-left tw-pt-1 tw-hidden ${
+          isDemo ? '@phone:tw-table-cell' : 'phone:tw-table-cell'
+        }`}
+        key={index}
+      >
+        {set.won ? (
+          <strong>{set.points}</strong>
+        ) : (
+          <span className={`tw-text-th-neutral-600`}>{set.points}</span>
+        )}
       </td>
-      <td className="tw-text-center tw-pt-1">
-        {isWinner ? <strong>{setsWon}</strong> : setsWon}
-      </td>
-      {sets.map((set, index) => {
-        return (
-          <td className="tw-text-left tw-pt-1 tw-hidden phone:tw-table-cell @phone:tw-table-cell" key={index}>
-            {set.won ? (
-              <strong>{set.points}</strong>
-            ) : (
-              <span className="tw-text-neutral-600">{set.points}</span>
-            )}
-          </td>
-        );
-      })}
-    </>
+    );
+  })}
+</>
+
   );
 };
 
