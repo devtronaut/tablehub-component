@@ -1,6 +1,6 @@
 ### CHANGELOG
 
-## [Unreleased]
+## [v0.1.0]
 
 ### Added
 - Components based on the original [vbcunibern-clubdesk-v2](https://github.com/devtronaut/vbc-unibern-clubdesk-v2)
