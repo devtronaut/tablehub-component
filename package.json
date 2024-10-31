@@ -1,10 +1,10 @@
 {
   "name": "@devtronaut/tablehub-component",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "The library for the tablehub component, providing the ranking, results and upcoming games tables.",
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
-  "types": "lib/index.d.ts",
+  "main": "lib/tablehub.prod.cjs.js",
+  "module": "lib/tablehub.prod.esm.js",
+  "types": "lib/tablehub.prod.d.ts",
   "files": [
     "lib"
   ],
@@ -12,8 +12,9 @@
     "last 2 versions, not dead, > 0.2%"
   ],
   "scripts": {
-    "build": "rollup -c",
-    "publish-lib": "npm run build && npm publish",
+    "lib:build": "rollup --config rollup.config.prod.mjs",
+    "lib:build:dev": "rollup --config rollup.config.dev.mjs",
+    "lib:publish": "npm run build && npm publish",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -28,9 +29,17 @@
   },
   "homepage": "https://github.com/devtronaut/tablehub-component#readme",
   "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/plugin-transform-runtime": "^7.25.9",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
+    "@babel/preset-typescript": "^7.26.0",
+    "@babel/runtime": "^7.26.0",
     "@chromatic-com/storybook": "^1.9.0",
+    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.1",
     "@storybook/addon-essentials": "^8.3.6",
     "@storybook/addon-interactions": "^8.3.6",
@@ -44,6 +53,7 @@
     "@storybook/test": "^8.3.6",
     "@tailwindcss/container-queries": "^0.1.1",
     "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "autoprefixer": "^10.4.20",
     "css-loader": "^7.1.2",
     "postcss": "^8.4.47",

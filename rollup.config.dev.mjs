@@ -5,24 +5,26 @@ import typescript from '@rollup/plugin-typescript';
 import postcss from 'rollup-plugin-postcss';
 import dts from 'rollup-plugin-dts';
 
-// This is required to read package.json file when
-// using Native ES modules in Node.js
-// https://rollupjs.org/command-line-interface/#importing-package-json
-import { createRequire } from 'node:module';
-const requireFile = createRequire(import.meta.url);
-const packageJson = requireFile('./package.json');
-
 export default [
   {
     input: 'src/index.ts',
     output: [
       {
-        file: packageJson.main,
+        file: 'lib/tablehub.dev.cjs.js',
         format: 'cjs',
         sourcemap: true,
       },
       {
-        file: packageJson.module,
+        file: 'lib/tablehub.dev.js',
+        name: 'tablehub',
+        format: 'iife',
+        globals: {
+          'react': 'React',
+          'react-dom/client': 'ReactDOM',
+        },
+      },
+      {
+        file: 'lib/tablehub.dev.esm.js',
         format: 'esm',
         sourcemap: true,
       },
@@ -44,13 +46,13 @@ export default [
     external: [/\.css$/],
   },
   {
-    input: "src/style.css",
-    output: [{ file: 'lib/index.css', format: 'es'}],
+    input: 'src/style.css',
+    output: [{ file: 'lib/index.css', format: 'es' }],
     plugins: [
-        postcss({
-            extract: true,
-            minimize: true
-        })
-    ]
-  }
+      postcss({
+        extract: true,
+        minimize: true,
+      }),
+    ],
+  },
 ];
