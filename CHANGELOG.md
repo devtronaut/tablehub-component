@@ -11,7 +11,7 @@
 - tablehub.renderTables function for browser environments with React and ReactDOM installed
 
 - Rollup configuration to build and bundle the project for the above mentioned targets
-- Github workflow to bump version, create tag and release to publish the component to the GitHub registry
+- Github workflow to bump version, create tag and release to publish the component to the NPMJS registry
 
 #### Fixed
 - None
