@@ -43,7 +43,9 @@ jobs:
       - name: Update changelog
         id: update_changelog
         run: |
-          sed -i 's/Unreleased/${{ steps.update_version.outputs.version }}/g'   CHANGELOG.md
+          sed -i -z 's/\n## Change History\n/---/g' CHANGELOG.md
+          sed -i 's/### \*\*\[Unreleased\]\*\*/### **[${{ steps.get_tag.outputs.version }}]**/g' CHANGELOG.md 
+          sed -i 's/## New Changes/## New Changes\n\n### **[Unreleased]**\n\n#### Added\n- None\n\n#### Fixed\n- None\n\n#### Updated\n- None\n\n\n## Change History/g' CHANGELOG.md
       - name: Create PR
         id: create_pr
         uses: peter-evans/create-pull-request@v5
