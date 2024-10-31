@@ -41,13 +41,13 @@ jobs:
       - name: Tag commit
         id: tag_commit
         run: |
-          next_version=${{ steps.get_tag.outputs.version }}
-          git tag -a "$next_version" -m "Version $next_version"
+          TAG=${{ steps.get_tag.outputs.version }}
+          git tag -a "$TAG" -m "Version $TAG"
           git push --follow-tags
       - name: Create changelog diff
         id: changelog_diff
         run: |
-          sed -n "/^## \[${{ steps.get_tag.outputs.version }}\]/,/^## \[$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))\]/{/^## \[$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))\]/!p;}" CHANGELOG.md > release_notes.md
+          sed -n "/^### \*\*\[${{ steps.get_tag.outputs.version }}\]\*\*/,/^### \*\*\[$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))\]\*\*/p" CHANGELOG.md | sed '$d' | sed '$d' > release_notes.md
       - name: Create release
         id: create_release
         env: 
