@@ -1,6 +1,6 @@
 {
-    "name": "@devtronaut/tablehub-component",
-    "version": "0.1.1",
+    "name": "@tablehub/tablehub-component",
+    "version": "0.1.0",
     "description": "The library for the tablehub component, providing the ranking, results and upcoming games tables.",
     "main": "lib/tablehub.prod.cjs.js",
     "module": "lib/tablehub.prod.esm.js",
@@ -18,7 +18,7 @@
         "prettier:fix": "npm run prettier -- --write",
         "lib:build": "rollup --config rollup.config.prod.mjs",
         "lib:build:dev": "rollup --config rollup.config.dev.mjs",
-        "lib:publish": "npm run lib:build && npm publish",
+        "lib:publish": "npm run lib:build && npm publish --provenance --access public",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build"
     },
