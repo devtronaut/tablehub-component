@@ -1,36 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
 export const useTablesApi = <T,>(
-  endpoint: string,
-  teamId: number
+    endpoint: string,
+    teamId: number
 ): [boolean, T, boolean] => {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState({} as T);
-  const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true)
+    const [data, setData] = useState({} as T)
+    const [error, setError] = useState(false)
 
-  useEffect(() => {
-    const url = `https://8jbh3h0zi0.execute-api.eu-central-1.amazonaws.com/vbcunibern-api/${endpoint}?teamid=${teamId}`;
+    useEffect(() => {
+        const url = `https://8jbh3h0zi0.execute-api.eu-central-1.amazonaws.com/vbcunibern-api/${endpoint}?teamid=${teamId}`
 
-    const headers = {
-      'Content-Type': 'application/json',
-    };
+        const headers = {
+            'Content-Type': 'application/json',
+        }
 
-    const fetchData = async () => {
-      try {
-        const data = await fetch(url, {
-          headers,
-        });
-        const json = (await data.json()) as T;
-        setData(json);
-      } catch (err) {
-        setError(true);
-      }
+        const fetchData = async () => {
+            try {
+                const data = await fetch(url, {
+                    headers,
+                })
+                const json = (await data.json()) as T
+                setData(json)
+            } catch {
+                setError(true)
+            }
 
-      setLoading(false);
-    };
+            setLoading(false)
+        }
 
-    fetchData();
-  }, []);
+        fetchData()
+    }, [])
 
-  return [loading, data, error];
-};
+    return [loading, data, error]
+}
