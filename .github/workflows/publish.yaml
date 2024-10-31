@@ -15,41 +15,47 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Setup node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-          registry-url: 'https://npm.pkg.github.com'
+          registry-url: 'https://registry.npmjs.org'
           scope: '@devtronaut'
+
       - name: Install dependencies
         run: npm ci
+
       - name: Publish library
         run: |
-          echo "@devtronaut:registry=https://npm.pkg.github.com" >> .npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+          echo "registry=https://registry.npmjs.org" >> .npmrc
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> .npmrc
           npm run lib:publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Setup git
         run: |
           git config user.name "devtronaut"
           git config user.email "devtronaut@hotmail.com"
+
       - name: Get tag
         id: get_tag
         run: |
           git branch --show-current
           git pull
           echo "version=v$(npm pkg get version | tr -d '\"')" >> $GITHUB_OUTPUT
+
       - name: Tag commit
         id: tag_commit
         run: |
           next_version=${{ steps.get_tag.outputs.version }}
           git tag -a "$next_version" -m "Version $next_version"
           git push --follow-tags
+
       - name: Create changelog diff
         id: changelog_diff
         run: |
           sed -n "/^## \[${{ steps.get_tag.outputs.version }}\]/,/^## \[$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))\]/{/^## \[$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))\]/!p;}" CHANGELOG.md > release_notes.md
+
       - name: Create release
         id: create_release
         env: 
@@ -60,5 +66,6 @@ jobs:
           --repo=$GITHUB_REPOSITORY \
           --title="Release $TAG" \
           --notes-file "./release_notes.md"
+
       - name: Delete release_notes file
         run: rm release_notes.md          
