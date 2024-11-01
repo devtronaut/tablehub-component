@@ -5,30 +5,20 @@
 ### **[Unreleased]**
 
 #### Added
-- None
+- tablehub.renderVolleyTables and tablehub.renderDemoTables to replace tablehub.renderTables and enable the demo table for use in browser contexts
 
 #### Fixed
-- None
+- Dates on upcoming games now display in correct formats depending on screen width
+- Remove container query anchor from productive tables altogether to avoid bugs and conflicts with classic media queries
 
 #### Updated
-- None
+- Improved responsiveness for the results table
+- Improved responsiveness for the rankings table (new breakpoint introduced to hide logos on very small phones)
 
 
 ## Change History
 
-### **[]**
-
-#### Added
-- None
-
-#### Fixed
-- None
-
-#### Updated
-- None
-
----
-### **[]**
+### **[v0.1.1]**
 
 #### Added
 - Components based on the original [vbcunibern-clubdesk-v2](https://github.com/devtronaut/vbc-unibern-clubdesk-v2)

@@ -34,39 +34,29 @@ export const ResultsTable = ({ teamId, isDemo }: TableProps) => {
     )
 
     return (
-        <table className={`tw-w-full tw-table-fixed tw-border-collapse`}>
+        <table
+            className={`tw-w-full tw-table-auto tablet:tw-table-fixed tw-border-collapse`}
+        >
             <thead className={`tw-sticky tw-top-0`}>
                 <tr className={`tw-bg-th-gray tw-text-th-white tw-w-full`}>
+                    <th className={`tw-text-center tw-py-1 tw-w-24`}>DATUM</th>
                     <th
-                        className={`tw-text-center tw-py-1 tw-w-24 ${
-                            isDemo ? '@tablet:tw-w-auto' : 'tablet:tw-w-auto'
-                        }`}
-                    >
-                        DATUM
-                    </th>
-                    <th
-                        className={`tw-text-center tw-py-1 tw-hidden ${
+                        className={`tw-text-center tw-py-1 tw-hidden tw-w-32 ${
                             isDemo
                                 ? '@phone:tw-table-cell'
-                                : 'phone:tw-table-cell'
+                                : 'tablet:tw-table-cell'
                         }`}
                     >
                         MODUS
                     </th>
                     <th className={`tw-text-center tw-py-1`}>TEAMS</th>
-                    <th
-                        className={`tw-text-center tw-py-1 tw-w-20 ${
-                            isDemo ? '@tablet:tw-w-auto' : 'tablet:tw-w-auto'
-                        }`}
-                    >
-                        SÄTZE
-                    </th>
+                    <th className={`tw-text-center tw-py-1 tw-w-20`}>SÄTZE</th>
                     <th
                         colSpan={maxPlayedSets}
-                        className={`tw-text-left tw-py-1 tw-hidden ${
+                        className={`tw-text-left tw-py-1 tw-hidden tw-w-60 ${
                             isDemo
                                 ? '@phone:tw-table-cell'
-                                : 'phone:tw-table-cell'
+                                : 'phone-sm:tw-table-cell'
                         }`}
                     >
                         PUNKTE
@@ -82,7 +72,7 @@ export const ResultsTable = ({ teamId, isDemo }: TableProps) => {
                         dateUtc={result.dateUtc}
                         mode={result.mode}
                         maxPlayedSets={maxPlayedSets}
-                        isDemo
+                        isDemo={isDemo}
                     />
                 )
             })}
@@ -107,7 +97,7 @@ const ResultTableRow = ({
     maxPlayedSets,
     isDemo,
 }: TableRowProps) => {
-    const [, short] = useDateTransformer(dateUtc)
+    const [, short, shortDateTwoDigitYear] = useDateTransformer(dateUtc)
 
     // Fill the sets array to the maximum number of sets played (to have an equal amount of cells in each row)
     const setDifference = maxPlayedSets - winner.sets.length
@@ -126,12 +116,15 @@ const ResultTableRow = ({
         >
             <tr>
                 <td rowSpan={2} className={`tw-text-center tw-py-1`}>
-                    {short}
+                    <span className="tw-hidden phone:tw-inline">{short}</span>
+                    <span className="tw-inline phone:tw-hidden">
+                        {shortDateTwoDigitYear}
+                    </span>
                 </td>
                 <td
                     rowSpan={2}
                     className={`tw-text-center tw-py-1 tw-hidden ${
-                        isDemo ? '@phone:tw-table-cell' : 'phone:tw-table-cell'
+                        isDemo ? '@phone:tw-table-cell' : 'tablet:tw-table-cell'
                     }`}
                 >
                     {mode}
@@ -182,20 +175,20 @@ const TeamResultRow = ({
     return (
         <>
             <td
-                className={`tw-text-center tw-pt-1 tw-th-whitespace-nowrap tw-text-nowrap tw-overflow-hidden tw-text-ellipsis`}
+                className={`tw-text-center tw-pt-1 tw-px-2 phone:tw-px-5 tw-th-whitespace-nowrap tw-text-nowrap tw-min-w-fit`}
             >
                 {isWinner ? <strong>{caption}</strong> : caption}
             </td>
-            <td className={`tw-text-center tw-pt-1`}>
+            <td className={`tw-text-center tw-pt-1 tw-block tw-w-20`}>
                 {isWinner ? <strong>{setsWon}</strong> : setsWon}
             </td>
             {sets.map((set, index) => {
                 return (
                     <td
-                        className={`tw-text-left tw-pt-1 tw-hidden ${
+                        className={`tw-text-left tw-pt-1 tw-px-2 tw-hidden ${
                             isDemo
                                 ? '@phone:tw-table-cell'
-                                : 'phone:tw-table-cell'
+                                : 'phone-sm:tw-table-cell'
                         }`}
                         key={index}
                     >

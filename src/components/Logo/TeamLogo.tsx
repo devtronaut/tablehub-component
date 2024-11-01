@@ -2,11 +2,12 @@ import React from 'react'
 
 type TeamLogoProps = {
     src?: string
+    styles?: string
 }
 
-export const TeamLogo = ({ src }: TeamLogoProps) => {
+export const TeamLogo = ({ src, styles }: TeamLogoProps) => {
     return (
-        <div className="tw-h-full">
+        <div className={`tw-h-full ${styles}`}>
             {src ? (
                 <img
                     src={src}
