@@ -123,30 +123,32 @@ const GamesTableRow = ({
             className={`tw-border-0 tw-border-y-2 tw-border-solid tw-border-th-slate-200 tw-duration-200 tw-bg-th-white hover:tw-bg-th-slate-100 even:tw-bg-th-slate-50 first:tw-border-t-0 last:tw-border-b-0`}
         >
             <td className={`tw-text-center tw-py-1`}>
-                <div
-                    className={`tw-w-full tw-text-center tw-hidden ${
-                        isDemo ? '@tablet:tw-block' : 'tablet:tw-block'
-                    }`}
-                >
-                    {long}
-                </div>
-                <div
-                    className={`tw-w-full tw-text-center tw-hidden ${
-                        isDemo
-                            ? '@tablet:tw-hidden'
-                            : 'phone:tw-block tablet:tw-hidden'
-                    }`}
-                >
-                    {short}
-                </div>
-                <div
-                    className={`tw-w-full tw-text-center tw-block ${
-                        isDemo
-                            ? '@tablet:tw-hidden'
-                            : 'phone-small:tw-block tablet:hidden'
-                    }`}
-                >
-                    {shortTwoDigitYear}
+                <div className={`tw-w-full tw-text-center`}>
+                    <span
+                        className={`tw-hidden ${
+                            isDemo ? '@tablet:tw-block' : 'tablet:tw-block'
+                        }`}
+                    >
+                        {long}
+                    </span>
+                    <span
+                        className={`tw-hidden ${
+                            isDemo
+                                ? '@tablet:tw-hidden'
+                                : 'phone:tw-block tablet:tw-hidden'
+                        }`}
+                    >
+                        {short}
+                    </span>
+                    <span
+                        className={`tw-block ${
+                            isDemo
+                                ? '@tablet:tw-hidden'
+                                : 'phone:tw-hidden'
+                        }`}
+                    >
+                        {shortTwoDigitYear}
+                    </span>
                 </div>
                 {`${time} Uhr`}
             </td>

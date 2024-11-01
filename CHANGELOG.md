@@ -16,19 +16,7 @@
 
 ## Change History
 
-### **[]**
-
-#### Added
-- None
-
-#### Fixed
-- None
-
-#### Updated
-- None
-
----
-### **[]**
+### **[v0.1.1]**
 
 #### Added
 - Components based on the original [vbcunibern-clubdesk-v2](https://github.com/devtronaut/vbc-unibern-clubdesk-v2)
