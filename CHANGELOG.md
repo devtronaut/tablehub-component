@@ -5,6 +5,20 @@
 ### **[Unreleased]**
 
 #### Added
+- None
+
+#### Fixed
+- None
+
+#### Updated
+- None
+
+
+## Change History
+
+### **[]**
+
+#### Added
 - tablehub.renderVolleyTables and tablehub.renderDemoTables to replace tablehub.renderTables and enable the demo table for use in browser contexts
 
 #### Fixed
@@ -15,9 +29,7 @@
 - Improved responsiveness for the results table
 - Improved responsiveness for the rankings table (new breakpoint introduced to hide logos on very small phones)
 
-
-## Change History
-
+---
 ### **[v0.1.1]**
 
 #### Added
