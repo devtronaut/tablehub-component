@@ -9,10 +9,11 @@
 
 #### Fixed
 - Dates on upcoming games now display in correct formats depending on screen width
-- Remove container query anchor from productive tables altogether to avoid bugs and conflicts
+- Remove container query anchor from productive tables altogether to avoid bugs and conflicts with classic media queries
 
 #### Updated
 - Improved responsiveness for the results table
+- Improved responsiveness for the rankings table (new breakpoint introduced to hide logos on very small phones)
 
 
 ## Change History
