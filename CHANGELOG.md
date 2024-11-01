@@ -5,13 +5,14 @@
 ### **[Unreleased]**
 
 #### Added
-- None
+- tablehub.renderVolleyTables and tablehub.renderDemoTables to replace tablehub.renderTables and enable the demo table for use in browser contexts
 
 #### Fixed
-- None
+- Dates on upcoming games now display in correct formats depending on screen width
+- Remove container query anchor from productive tables altogether to avoid bugs and conflicts
 
 #### Updated
-- None
+- Improved responsiveness for the results table
 
 
 ## Change History
