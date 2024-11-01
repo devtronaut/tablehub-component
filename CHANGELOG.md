@@ -16,7 +16,7 @@
 
 ## Change History
 
-### **[]**
+### **[v0.2.0]**
 
 #### Added
 - tablehub.renderVolleyTables and tablehub.renderDemoTables to replace tablehub.renderTables and enable the demo table for use in browser contexts
