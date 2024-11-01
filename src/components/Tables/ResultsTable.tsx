@@ -56,7 +56,7 @@ export const ResultsTable = ({ teamId, isDemo }: TableProps) => {
                         className={`tw-text-left tw-py-1 tw-hidden tw-w-60 ${
                             isDemo
                                 ? '@phone:tw-table-cell'
-                                : 'phone-small:tw-table-cell'
+                                : 'phone-sm:tw-table-cell'
                         }`}
                     >
                         PUNKTE
@@ -188,7 +188,7 @@ const TeamResultRow = ({
                         className={`tw-text-left tw-pt-1 tw-px-2 tw-hidden ${
                             isDemo
                                 ? '@phone:tw-table-cell'
-                                : 'phone-small:tw-table-cell'
+                                : 'phone-sm:tw-table-cell'
                         }`}
                         key={index}
                     >

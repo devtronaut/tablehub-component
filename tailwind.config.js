@@ -10,7 +10,8 @@ module.exports = {
   content: ['./src/**/*.tsx'],
   theme: {
     screens: {
-      'phone-small': '420px',
+      'phone-xs': '360px',
+      'phone-sm': '420px',
       'phone': '550px',
       'tablet': '700px',
     },
