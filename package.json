@@ -1,6 +1,6 @@
 {
     "name": "@tablehub/tablehub-component",
-    "version": "0.2.0",
+    "version": "0.2.2",
     "description": "The library for the tablehub component, providing the ranking, results and upcoming games tables.",
     "main": "lib/tablehub.prod.cjs.js",
     "module": "lib/tablehub.prod.esm.js",
@@ -19,6 +19,7 @@
         "lib:build": "rollup --config rollup.config.prod.mjs",
         "lib:build:dev": "rollup --config rollup.config.dev.mjs",
         "lib:publish": "npm run lib:build && npm publish --provenance --access public",
+        "lib:publish:patch": "npm run lib:build && npm publish --access public",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build"
     },

@@ -32,15 +32,17 @@ export const RankingTable = ({ teamId, teamName, isDemo }: TableProps) => {
             <thead className={`tw-sticky tw-top-0`}>
                 <tr className={`tw-bg-th-gray tw-text-th-white`}>
                     <th
-                        className={`tw-text-center tw-py-1 tw-w-20 ${
+                        className={`tw-text-center tw-text-nowrap tw-py-1 tw-w-20 ${
                             isDemo ? `@tablet:tw-w-auto` : `tablet:tw-w-auto`
                         }`}
                     >
                         RANG
                     </th>
-                    <th className={`tw-text-left tw-py-1`}>TEAM</th>
+                    <th className={`tw-text-left tw-text-nowrap tw-py-1`}>
+                        TEAM
+                    </th>
                     <th
-                        className={`tw-text-center tw-py-1 tw-hidden tw-w-fit ${
+                        className={`tw-text-center tw-py-1 tw-hidden ${
                             isDemo
                                 ? `@phone:tw-table-cell`
                                 : `phone:tw-table-cell`
@@ -49,7 +51,7 @@ export const RankingTable = ({ teamId, teamName, isDemo }: TableProps) => {
                         SIEGE
                     </th>
                     <th
-                        className={`tw-text-center tw-py-1 tw-hidden tw-overflow-hidden tw-text-ellipsis ${
+                        className={`tw-text-center tw-text-nowrap tw-py-1 tw-hidden tw-overflow-hidden tw-text-ellipsis ${
                             isDemo
                                 ? `@phone:tw-table-cell`
                                 : `phone:tw-table-cell`
@@ -58,7 +60,7 @@ export const RankingTable = ({ teamId, teamName, isDemo }: TableProps) => {
                         NIEDERLAGEN
                     </th>
                     <th
-                        className={`tw-text-center tw-py-1 tw-w-24 ${
+                        className={`tw-text-center tw-text-nowrap  tw-py-1 tw-w-24 ${
                             isDemo ? `@tablet:tw-w-auto` : `tablet:tw-w-auto`
                         }`}
                     >

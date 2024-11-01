@@ -8,7 +8,7 @@
 - None
 
 #### Fixed
-- None
+- Ranking Table: Wins row not getting squished anymore. Make table heading texts no-wrap.
 
 #### Updated
 - None
