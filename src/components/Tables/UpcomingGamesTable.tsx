@@ -142,9 +142,7 @@ const GamesTableRow = ({
                     </span>
                     <span
                         className={`tw-block ${
-                            isDemo
-                                ? '@tablet:tw-hidden'
-                                : 'phone:tw-hidden'
+                            isDemo ? '@tablet:tw-hidden' : 'phone:tw-hidden'
                         }`}
                     >
                         {shortTwoDigitYear}

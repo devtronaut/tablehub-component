@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Test Tablehub component</title>
         <script
             crossorigin
@@ -18,21 +18,23 @@
     <body>
         <h1>Testing the Tablehub component</h1>
         <div id="testReferenceNodeId">I'm the test reference id node!</div>
-        
-        <div class="testReferenceNodeClassName">I'm the test reference class node!</div>
+
+        <div class="testReferenceNodeClassName">
+            I'm the test reference class node!
+        </div>
 
         <script>
             const tablesConfig = {
                 teamName: 'VBC Uni Bern',
                 teamId: 6246,
-                referenceNode: document.getElementsByClassName('testReferenceNodeClassName')[0],
+                referenceNode: document.getElementsByClassName(
+                    'testReferenceNodeClassName'
+                )[0],
                 position: 'before',
             }
 
             tablehub.renderVolleyTables(tablesConfig)
             tablehub.renderDemoTables(tablesConfig)
-
-
         </script>
     </body>
 </html>

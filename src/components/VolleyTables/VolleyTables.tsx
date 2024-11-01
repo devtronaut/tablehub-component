@@ -14,10 +14,10 @@ export type TeamProps = {
 }
 
 export const VolleyTables = ({ teamId, teamName }: TeamProps) =>
-    Tables({ teamId, teamName, isDemo: false });
+    Tables({ teamId, teamName, isDemo: false })
 
 export const DemoTables = ({ teamId, teamName }: TeamProps) =>
-    Tables({ teamId, teamName, isDemo: true });
+    Tables({ teamId, teamName, isDemo: true })
 
 const Tables = ({ teamId, teamName, isDemo = false }: TableProps) => {
     const [isRanking, setRanking] = useState(true)
@@ -63,7 +63,9 @@ const Tables = ({ teamId, teamName, isDemo = false }: TableProps) => {
                     />
                 </div>
 
-                <div className={`${isDemo ? 'tw-@container' : ''} tw-w-full tw-bg-th-white tw-rounded-md tw-rounded-tl-none tw-max-h-[550px] tw-overflow-y-auto tw-shadow`}>
+                <div
+                    className={`${isDemo ? 'tw-@container' : ''} tw-w-full tw-bg-th-white tw-rounded-md tw-rounded-tl-none tw-max-h-[550px] tw-overflow-y-auto tw-shadow`}
+                >
                     {isRanking && (
                         <RankingTable
                             teamId={teamId}

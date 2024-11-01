@@ -34,14 +34,12 @@ export const ResultsTable = ({ teamId, isDemo }: TableProps) => {
     )
 
     return (
-        <table className={`tw-w-full tw-table-auto tablet:tw-table-fixed tw-border-collapse`}>
+        <table
+            className={`tw-w-full tw-table-auto tablet:tw-table-fixed tw-border-collapse`}
+        >
             <thead className={`tw-sticky tw-top-0`}>
                 <tr className={`tw-bg-th-gray tw-text-th-white tw-w-full`}>
-                    <th
-                        className={`tw-text-center tw-py-1 tw-w-24`}
-                    >
-                        DATUM
-                    </th>
+                    <th className={`tw-text-center tw-py-1 tw-w-24`}>DATUM</th>
                     <th
                         className={`tw-text-center tw-py-1 tw-hidden tw-w-32 ${
                             isDemo
@@ -52,11 +50,7 @@ export const ResultsTable = ({ teamId, isDemo }: TableProps) => {
                         MODUS
                     </th>
                     <th className={`tw-text-center tw-py-1`}>TEAMS</th>
-                    <th
-                        className={`tw-text-center tw-py-1 tw-w-20`}
-                    >
-                        SÄTZE
-                    </th>
+                    <th className={`tw-text-center tw-py-1 tw-w-20`}>SÄTZE</th>
                     <th
                         colSpan={maxPlayedSets}
                         className={`tw-text-left tw-py-1 tw-hidden tw-w-60 ${
@@ -122,8 +116,10 @@ const ResultTableRow = ({
         >
             <tr>
                 <td rowSpan={2} className={`tw-text-center tw-py-1`}>
-                    <span className='tw-hidden phone:tw-inline'>{short}</span>
-                    <span className='tw-inline phone:tw-hidden'>{shortDateTwoDigitYear}</span>
+                    <span className="tw-hidden phone:tw-inline">{short}</span>
+                    <span className="tw-inline phone:tw-hidden">
+                        {shortDateTwoDigitYear}
+                    </span>
                 </td>
                 <td
                     rowSpan={2}
@@ -190,7 +186,9 @@ const TeamResultRow = ({
                 return (
                     <td
                         className={`tw-text-left tw-pt-1 tw-px-2 tw-hidden ${
-                            isDemo ? '@phone:tw-table-cell' : 'phone-small:tw-table-cell'
+                            isDemo
+                                ? '@phone:tw-table-cell'
+                                : 'phone-small:tw-table-cell'
                         }`}
                         key={index}
                     >

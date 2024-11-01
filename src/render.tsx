@@ -1,5 +1,8 @@
 import React from 'react'
-import { DemoTables, VolleyTables } from './components/VolleyTables/VolleyTables'
+import {
+    DemoTables,
+    VolleyTables,
+} from './components/VolleyTables/VolleyTables'
 import { createRoot } from 'react-dom/client'
 
 type TablesConfig = {
@@ -10,7 +13,7 @@ type TablesConfig = {
 }
 
 type RenderConfig = TablesConfig & {
-    isDemo: boolean,
+    isDemo: boolean
 }
 
 export const renderVolleyTables = ({
@@ -19,7 +22,7 @@ export const renderVolleyTables = ({
     referenceNode,
     position,
 }: TablesConfig) => {
-    renderTables({teamName, teamId, referenceNode, position, isDemo: false});
+    renderTables({ teamName, teamId, referenceNode, position, isDemo: false })
 }
 
 export const renderDemoTables = ({
@@ -51,10 +54,9 @@ const renderTables = ({
 
     const root = createRoot(rootDiv)
 
-    if(isDemo){
+    if (isDemo) {
         root.render(<DemoTables teamId={teamId} teamName={teamName} />)
     } else {
         root.render(<VolleyTables teamId={teamId} teamName={teamName} />)
     }
 }
-
