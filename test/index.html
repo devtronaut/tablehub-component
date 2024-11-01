@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Test Tablehub component</title>
         <script
             crossorigin
@@ -10,21 +12,29 @@
             crossorigin
             src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
         ></script>
-        <script crossorigin src="../lib/index.js"></script>
+        <!-- <script crossorigin src="https://unpkg.com/@tablehub/tablehub-component@0.1.1/lib/tablehub.prod.min.js"></script> -->
+        <script src="../lib/tablehub.dev.js"></script>
     </head>
     <body>
         <h1>Testing the Tablehub component</h1>
-        <div id="testReferenceNode">I'm the test reference node!</div>
+        <div id="testReferenceNodeId">I'm the test reference id node!</div>
+
+        <div class="testReferenceNodeClassName">
+            I'm the test reference class node!
+        </div>
 
         <script>
-            const config = {
+            const tablesConfig = {
                 teamName: 'VBC Uni Bern',
-                teamId: 1111,
-                referenceNode: document.getElementById('testReferenceNode'),
-                position: 'after',
+                teamId: 6246,
+                referenceNode: document.getElementsByClassName(
+                    'testReferenceNodeClassName'
+                )[0],
+                position: 'before',
             }
 
-            tablehub.renderTables(config)
+            tablehub.renderVolleyTables(tablesConfig)
+            tablehub.renderDemoTables(tablesConfig)
         </script>
     </body>
 </html>

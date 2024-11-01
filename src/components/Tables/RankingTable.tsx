@@ -110,7 +110,10 @@ const RankingTableRow = ({
                 <div
                     className={`tw-h-8 tw-flex tw-flex-row tw-items-center tw-gap-2 tw-text-nowrap`}
                 >
-                    <TeamLogo src={team.teamLogoUrl} />
+                    <TeamLogo
+                        src={team.teamLogoUrl}
+                        styles="tw-hidden phone-xs:tw-block"
+                    />
                     <TextContent text={team.teamCaption} bold={isHomeTeam} />
                 </div>
             </td>

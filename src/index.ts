@@ -1,9 +1,7 @@
 import './style.css'
 
-import {
+export {
     VolleyTables,
     DemoTables,
 } from './components/VolleyTables/VolleyTables'
-import { renderTables } from './render'
-
-export { VolleyTables, DemoTables, renderTables }
+export { renderVolleyTables, renderDemoTables } from './render'
