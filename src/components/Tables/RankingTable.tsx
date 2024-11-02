@@ -5,9 +5,9 @@ import { Spinner } from '../Loading/Spinner'
 import { Toast } from '../Toast/Toast'
 import { useRankingApi } from '../../common/hooks/api/useRankingsApi'
 import { TeamLogo } from '../Logo/TeamLogo'
-import { TableProps } from '../VolleyTables/VolleyTables'
+import { TeamProps } from '../VolleyTables/VolleyTables'
 
-export const RankingTable = ({ teamId, teamName, isDemo }: TableProps) => {
+export const RankingTable = ({ teamId, teamName }: TeamProps) => {
     const [loading, ranking, error] = useRankingApi(teamId)
 
     if (error) {
@@ -28,43 +28,31 @@ export const RankingTable = ({ teamId, teamName, isDemo }: TableProps) => {
     }
 
     return (
-        <table className={`tw-w-full tw-table-fixed tw-border-collapse`}>
+        <table className={`tw-w-full tw-border-collapse`}>
             <thead className={`tw-sticky tw-top-0`}>
                 <tr className={`tw-bg-th-gray tw-text-th-white`}>
                     <th
-                        className={`tw-text-center tw-text-nowrap tw-py-1 tw-w-20 ${
-                            isDemo ? `@tablet:tw-w-auto` : `tablet:tw-w-auto`
-                        }`}
+                        className={`tw-text-center tw-py-1 tw-px-2 tw-text-nowrap`}
                     >
-                        RANG
+                        Rang
                     </th>
-                    <th className={`tw-text-left tw-text-nowrap tw-py-1`}>
-                        TEAM
+                    <th className={`tw-text-left tw-py-1 tw-text-nowrap`}>
+                        Team
                     </th>
                     <th
-                        className={`tw-text-center tw-py-1 tw-hidden ${
-                            isDemo
-                                ? `@phone:tw-table-cell`
-                                : `phone:tw-table-cell`
-                        }`}
+                        className={`tw-text-center tw-py-1 tw-px-2 tw-text-nowrap tw-hidden @md:tw-table-cell`}
                     >
-                        SIEGE
+                        Siege
                     </th>
                     <th
-                        className={`tw-text-center tw-text-nowrap tw-py-1 tw-hidden tw-overflow-hidden tw-text-ellipsis ${
-                            isDemo
-                                ? `@phone:tw-table-cell`
-                                : `phone:tw-table-cell`
-                        }`}
+                        className={`tw-text-center tw-py-1 tw-px-2 tw-text-nowrap tw-overflow-hidden tw-text-ellipsis tw-hidden @md:tw-table-cell`}
                     >
-                        NIEDERLAGEN
+                        Niederlagen
                     </th>
                     <th
-                        className={`tw-text-center tw-text-nowrap  tw-py-1 tw-w-24 ${
-                            isDemo ? `@tablet:tw-w-auto` : `tablet:tw-w-auto`
-                        }`}
+                        className={`tw-text-center tw-py-1 tw-px-2 tw-text-nowrap`}
                     >
-                        PUNKTE
+                        Punkte
                     </th>
                 </tr>
             </thead>
@@ -75,7 +63,6 @@ export const RankingTable = ({ teamId, teamName, isDemo }: TableProps) => {
                             key={index}
                             team={team}
                             isHomeTeam={team.teamCaption?.includes(teamName)}
-                            isDemo={isDemo}
                         />
                     )
                 })}
@@ -87,13 +74,11 @@ export const RankingTable = ({ teamId, teamName, isDemo }: TableProps) => {
 type RankingTableRowProps = {
     team: TeamRankingSchema
     isHomeTeam?: boolean
-    isDemo: boolean
 }
 
 const RankingTableRow = ({
     team,
-    isHomeTeam = false,
-    isDemo,
+    isHomeTeam = false
 }: RankingTableRowProps) => {
     return (
         <tr
@@ -114,22 +99,18 @@ const RankingTableRow = ({
                 >
                     <TeamLogo
                         src={team.teamLogoUrl}
-                        styles="tw-hidden phone-xs:tw-block"
+                        styles={`tw-hidden @sm:tw-block`}
                     />
                     <TextContent text={team.teamCaption} bold={isHomeTeam} />
                 </div>
             </td>
             <td
-                className={`tw-text-center tw-py-2 tw-hidden ${
-                    isDemo ? `@phone:tw-table-cell` : `phone:tw-table-cell`
-                }`}
+                className={`tw-text-center tw-py-2 tw-hidden @md:tw-table-cell`}
             >
                 <TextContent text={team.wins} bold={isHomeTeam} />
             </td>
             <td
-                className={`tw-text-center tw-py-2 tw-hidden ${
-                    isDemo ? `@phone:tw-table-cell` : `phone:tw-table-cell`
-                }`}
+                className={`tw-text-center tw-py-2 tw-hidden @md:tw-table-cell`}
             >
                 <TextContent text={team.defeats} bold={isHomeTeam} />
             </td>

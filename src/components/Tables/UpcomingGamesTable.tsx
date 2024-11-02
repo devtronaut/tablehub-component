@@ -1,5 +1,5 @@
 import React from 'react'
-import { TableProps } from '../VolleyTables/VolleyTables'
+import { TeamProps } from '../VolleyTables/VolleyTables'
 import {
     LocationSchema,
     UpcomingGamesSchema,
@@ -12,7 +12,7 @@ import { useDateTransformer } from '../../common/hooks/transformers/useDateTrans
 import { useMapsLinkTransformer } from '../../common/hooks/transformers/useMapsLinkTransformer'
 import { TeamLogo } from '../Logo/TeamLogo'
 
-export const UpcomingGamesTable = ({ teamId, isDemo }: TableProps) => {
+export const UpcomingGamesTable = ({ teamId }: TeamProps) => {
     const [loading, games, error] = useUpcomingGamesApi(teamId)
 
     if (error) {
@@ -33,53 +33,19 @@ export const UpcomingGamesTable = ({ teamId, isDemo }: TableProps) => {
     }
 
     return (
-        <table
-            className={`tw-w-full tw-table-fixed tablet:tw-table-auto @tablet:tw-table-auto tw-border-collapse ${
-                isDemo ? '' : ''
-            }`}
-        >
+        <table className={`tw-w-full tw-border-collapse`}>
             <thead className={`tw-sticky tw-top-0`}>
                 <tr className={`tw-bg-th-gray tw-text-th-white`}>
-                    <GamesTableHeader
-                        text={`DATUM`}
-                        styles={`tw-w-24 tw-text-center ${
-                            isDemo ? '@phone:tw-w-auto' : 'phone:tw-w-auto'
-                        }`}
-                    />
-                    <GamesTableHeader
-                        text={`GEGNER`}
-                        styles={`tw-text-center ${
-                            isDemo
-                                ? '@phone:tw-text-left'
-                                : 'phone:tw-text-left'
-                        }`}
-                    />
-                    <GamesTableHeader
-                        text={`TYP`}
-                        styles={`tw-hidden tw-text-center ${
-                            isDemo
-                                ? '@tablet:tw-table-cell'
-                                : 'tablet:tw-table-cell'
-                        }`}
-                    />
-                    <GamesTableHeader
-                        text={`ORT`}
-                        styles={`tw-w-12 tw-text-center ${
-                            isDemo ? '@phone:tw-w-auto' : 'phone:tw-w-auto'
-                        }`}
-                    />
+                    <GamesTableHeader text={`Datum`} styles={``} />
+                    <GamesTableHeader text={`Gegner`} styles={``} />
+                    <GamesTableHeader text={`Typ`} styles={`tw-hidden @xl:tw-table-cell`} />
+                    <GamesTableHeader text={`Ort`} styles={``} />
                 </tr>
             </thead>
             <tbody>
                 {games.upcomingGames.map(
                     (game: UpcomingGamesSchema, index: number) => {
-                        return (
-                            <GamesTableRow
-                                key={index}
-                                {...game}
-                                isDemo={isDemo}
-                            />
-                        )
+                        return <GamesTableRow key={index} {...game} />
                     }
                 )}
             </tbody>
@@ -93,7 +59,11 @@ type GamesTableHeaderProps = {
 }
 
 const GamesTableHeader = ({ text, styles }: GamesTableHeaderProps) => {
-    return <th className={` tw-py-1 ${styles ?? ''}`}>{text}</th>
+    return (
+        <th className={`tw-text-center tw-py-1 tw-px-2 ${styles ?? ''}`}>
+            {text}
+        </th>
+    )
 }
 
 type GamesTableRowProps = {
@@ -103,7 +73,6 @@ type GamesTableRowProps = {
     location: LocationSchema
     dateUtc: string
     opponentLogoUrl: string
-    isDemo: boolean
 }
 
 const GamesTableRow = ({
@@ -113,7 +82,6 @@ const GamesTableRow = ({
     location,
     dateUtc,
     opponentLogoUrl,
-    isDemo,
 }: GamesTableRowProps) => {
     const [long, short, shortTwoDigitYear, time] = useDateTransformer(dateUtc)
     const mapsLink = useMapsLinkTransformer(location.plusCode)
@@ -124,60 +92,30 @@ const GamesTableRow = ({
         >
             <td className={`tw-text-center tw-py-1`}>
                 <div className={`tw-w-full tw-text-center`}>
-                    <span
-                        className={`tw-hidden ${
-                            isDemo ? '@tablet:tw-block' : 'tablet:tw-block'
-                        }`}
-                    >
-                        {long}
-                    </span>
-                    <span
-                        className={`tw-hidden ${
-                            isDemo
-                                ? '@tablet:tw-hidden'
-                                : 'phone:tw-block tablet:tw-hidden'
-                        }`}
-                    >
-                        {short}
-                    </span>
-                    <span
-                        className={`tw-block ${
-                            isDemo ? '@tablet:tw-hidden' : 'phone:tw-hidden'
-                        }`}
-                    >
-                        {shortTwoDigitYear}
-                    </span>
+                    <span className={`tw-hidden @xl:tw-inline`}>{long}</span>
+                    <span className={`tw-hidden @sm:tw-inline @xl:tw-hidden`}>{short}</span>
+                    <span className={`@sm:tw-hidden`}>{shortTwoDigitYear}</span>
                 </div>
-                {`${time} Uhr`}
+                <div>
+                    <span>{time}</span>
+                    <span className="tw-hidden @sm:tw-inline">{' Uhr'}</span>
+                </div>
             </td>
             <td
                 className={`tw-text-center tw-py-1 tw-th-whitespace-nowrap tw-overflow-hidden tw-text-ellipsis`}
             >
                 <div
-                    className={`tw-h-12 tw-flex tw-flex-col tw-items-center tw-gap-0 ${
-                        isDemo
-                            ? '@phone:tw-gap-2 @phone:tw-flex-row @tablet:tw-h-8'
-                            : 'phone:tw-gap-2 phone:tw-flex-row tablet:tw-h-8'
-                    }`}
+                    className={`tw-h-12 tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-1`}
                 >
-                    <div
-                        className={`tw-h-[50%] ${
-                            isDemo ? '@tablet:tw-h-full' : 'tablet:tw-h-full'
-                        }`}
-                    >
+                    <div className={`tw-h-1/2`}>
                         <TeamLogo src={opponentLogoUrl} />
                     </div>
                     {opponent}
                 </div>
             </td>
-            <td
-                className={`tw-text-center tw-py-1 tw-hidden ${
-                    isDemo ? '@tablet:tw-table-cell' : 'tablet:tw-table-cell'
-                }`}
-            >
-                {mode}
-                <br />
-                {type}
+            <td className={`tw-text-center tw-py-1 tw-hidden @xl:tw-table-cell`}>
+                <div>{mode}</div>
+                <div>{type}</div>
             </td>
             <td
                 className={`tw-text-center tw-align-middle tw-py-1 tw-text-ellipsis`}
@@ -186,26 +124,16 @@ const GamesTableRow = ({
                     href={mapsLink}
                     target="_blank"
                     rel="noreferrer"
-                    className={`tw-hidden ${
-                        isDemo ? '@tablet:tw-inline' : 'tablet:tw-inline'
-                    }`}
+                    className={`tw-hidden @lg:tw-block`}
                 >
                     {location.caption}
                 </a>
-                <div
-                    className={`tw-text-balance tw-mt-1 tw-hidden ${
-                        isDemo ? '@tablet:tw-block' : 'tablet:tw-block'
-                    }`}
-                >
+                <div className={`tw-text-balance tw-mt-1`}>
                     <div
-                        className={`tw-th-whitespace-nowrap tw-text-center`}
+                        className={`tw-th-whitespace-nowrap tw-text-center tw-hidden @lg:tw-block`}
                     >{`${location.zip} ${location.city}`}</div>
                 </div>
-                <div
-                    className={`tw-h-8 tw-flex tw-flex-row tw-justify-around ${
-                        isDemo ? '@tablet:tw-hidden' : 'tablet:tw-hidden'
-                    }`}
-                >
+                <div className={`tw-h-8 tw-flex tw-flex-row tw-justify-around @lg:tw-hidden`}>
                     <PinLink mapsLink={mapsLink} />
                 </div>
             </td>

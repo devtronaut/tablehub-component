@@ -11,7 +11,8 @@
 - Ranking Table: Wins row not getting squished anymore. Make table heading texts no-wrap.
 
 #### Updated
-- None
+- Responsiveness now with container queries instead of media queries for more flexibility.
+- Demotables and renderDemoTables not needed anymore since no difference between responsiveness methods has to be made.
 
 
 ## Change History
