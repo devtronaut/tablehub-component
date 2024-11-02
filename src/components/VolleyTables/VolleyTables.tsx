@@ -60,10 +60,7 @@ const Tables = ({ teamId, teamName }: TeamProps) => {
                     className={`tw-w-full tw-bg-th-white tw-rounded-md tw-rounded-tl-none tw-max-h-[550px] tw-overflow-y-auto`}
                 >
                     {isRanking && (
-                        <RankingTable
-                            teamId={teamId}
-                            teamName={teamName}
-                        />
+                        <RankingTable teamId={teamId} teamName={teamName} />
                     )}
                     {isUpcomingGames && (
                         <UpcomingGamesTable
@@ -72,10 +69,7 @@ const Tables = ({ teamId, teamName }: TeamProps) => {
                         />
                     )}
                     {isResults && (
-                        <ResultsTable
-                            teamId={teamId}
-                            teamName={teamName}
-                        />
+                        <ResultsTable teamId={teamId} teamName={teamName} />
                     )}
                 </div>
             </div>

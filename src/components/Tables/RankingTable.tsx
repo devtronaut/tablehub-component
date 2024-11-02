@@ -78,7 +78,7 @@ type RankingTableRowProps = {
 
 const RankingTableRow = ({
     team,
-    isHomeTeam = false
+    isHomeTeam = false,
 }: RankingTableRowProps) => {
     return (
         <tr

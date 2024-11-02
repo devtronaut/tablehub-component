@@ -38,11 +38,17 @@ export const ResultsTable = ({ teamId }: TeamProps) => {
             <thead className={`tw-sticky tw-top-0`}>
                 <tr className={`tw-bg-th-gray tw-text-th-white tw-w-full`}>
                     <th className={`tw-text-center tw-py-1 tw-px-2`}>Datum</th>
-                    <th className={`tw-text-center tw-py-1 tw-px-2 tw-hidden @xl:tw-table-cell`}>
+                    <th
+                        className={`tw-text-center tw-py-1 tw-px-2 tw-hidden @xl:tw-table-cell`}
+                    >
                         Modus
                     </th>
                     {/* Text center for bigger screens */}
-                    <th className={`tw-text-left tw-py-1 tw-px-2 @lg:tw-text-center`}>Teams</th>
+                    <th
+                        className={`tw-text-left tw-py-1 tw-px-2 @lg:tw-text-center`}
+                    >
+                        Teams
+                    </th>
                     <th className={`tw-text-center tw-py-1 tw-px-2`}>Sätze</th>
                     <th
                         colSpan={maxPlayedSets}
@@ -81,7 +87,7 @@ const ResultTableRow = ({
     loser,
     dateUtc,
     mode,
-    maxPlayedSets
+    maxPlayedSets,
 }: TableRowProps) => {
     const [, short, shortDateTwoDigitYear] = useDateTransformer(dateUtc)
 
@@ -109,7 +115,10 @@ const ResultTableRow = ({
                         {shortDateTwoDigitYear}
                     </span>
                 </td>
-                <td rowSpan={2} className={`tw-text-center tw-py-1 tw-hidden @xl:tw-table-cell`}>
+                <td
+                    rowSpan={2}
+                    className={`tw-text-center tw-py-1 tw-hidden @xl:tw-table-cell`}
+                >
                     {mode}
                 </td>
                 <TeamResultRow
@@ -149,7 +158,7 @@ const TeamResultRow = ({
     isWinner,
     caption,
     setsWon,
-    sets
+    sets,
 }: TeamResultRowProps) => {
     return (
         <>

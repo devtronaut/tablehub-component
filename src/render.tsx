@@ -1,7 +1,5 @@
 import React from 'react'
-import {
-    VolleyTables,
-} from './components/VolleyTables/VolleyTables'
+import { VolleyTables } from './components/VolleyTables/VolleyTables'
 import { createRoot } from 'react-dom/client'
 
 type TablesConfig = {
@@ -24,7 +22,7 @@ const renderTables = ({
     teamName,
     teamId,
     referenceNode,
-    position
+    position,
 }: TablesConfig) => {
     // generate rootDiv with 'root' id
     const rootDiv = document.createElement('div')

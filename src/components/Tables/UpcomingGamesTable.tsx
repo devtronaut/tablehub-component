@@ -38,7 +38,10 @@ export const UpcomingGamesTable = ({ teamId }: TeamProps) => {
                 <tr className={`tw-bg-th-gray tw-text-th-white`}>
                     <GamesTableHeader text={`Datum`} styles={``} />
                     <GamesTableHeader text={`Gegner`} styles={``} />
-                    <GamesTableHeader text={`Typ`} styles={`tw-hidden @xl:tw-table-cell`} />
+                    <GamesTableHeader
+                        text={`Typ`}
+                        styles={`tw-hidden @xl:tw-table-cell`}
+                    />
                     <GamesTableHeader text={`Ort`} styles={``} />
                 </tr>
             </thead>
@@ -93,7 +96,9 @@ const GamesTableRow = ({
             <td className={`tw-text-center tw-py-1`}>
                 <div className={`tw-w-full tw-text-center`}>
                     <span className={`tw-hidden @xl:tw-inline`}>{long}</span>
-                    <span className={`tw-hidden @sm:tw-inline @xl:tw-hidden`}>{short}</span>
+                    <span className={`tw-hidden @sm:tw-inline @xl:tw-hidden`}>
+                        {short}
+                    </span>
                     <span className={`@sm:tw-hidden`}>{shortTwoDigitYear}</span>
                 </div>
                 <div>
@@ -113,7 +118,9 @@ const GamesTableRow = ({
                     {opponent}
                 </div>
             </td>
-            <td className={`tw-text-center tw-py-1 tw-hidden @xl:tw-table-cell`}>
+            <td
+                className={`tw-text-center tw-py-1 tw-hidden @xl:tw-table-cell`}
+            >
                 <div>{mode}</div>
                 <div>{type}</div>
             </td>
@@ -133,7 +140,9 @@ const GamesTableRow = ({
                         className={`tw-th-whitespace-nowrap tw-text-center tw-hidden @lg:tw-block`}
                     >{`${location.zip} ${location.city}`}</div>
                 </div>
-                <div className={`tw-h-8 tw-flex tw-flex-row tw-justify-around @lg:tw-hidden`}>
+                <div
+                    className={`tw-h-8 tw-flex tw-flex-row tw-justify-around @lg:tw-hidden`}
+                >
                     <PinLink mapsLink={mapsLink} />
                 </div>
             </td>
