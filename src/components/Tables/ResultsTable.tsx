@@ -1,5 +1,5 @@
 import React from 'react'
-import { TableProps } from '../VolleyTables/VolleyTables'
+import { TeamProps } from '../VolleyTables/VolleyTables'
 import { useDateTransformer } from '../../common/hooks/transformers/useDateTransformer'
 import { useResultsApi } from '../../common/hooks/api/useResultsApi'
 import {
@@ -9,7 +9,7 @@ import {
 import { Spinner } from '../Loading/Spinner'
 import { Toast } from '../Toast/Toast'
 
-export const ResultsTable = ({ teamId, isDemo }: TableProps) => {
+export const ResultsTable = ({ teamId }: TeamProps) => {
     const [loading, results, error] = useResultsApi(teamId)
 
     if (error) {
@@ -34,32 +34,27 @@ export const ResultsTable = ({ teamId, isDemo }: TableProps) => {
     )
 
     return (
-        <table
-            className={`tw-w-full tw-table-auto tablet:tw-table-fixed tw-border-collapse`}
-        >
+        <table className={`tw-w-full tw-border-collapse`}>
             <thead className={`tw-sticky tw-top-0`}>
                 <tr className={`tw-bg-th-gray tw-text-th-white tw-w-full`}>
-                    <th className={`tw-text-center tw-py-1 tw-w-24`}>DATUM</th>
+                    <th className={`tw-text-center tw-py-1 tw-px-2`}>Datum</th>
                     <th
-                        className={`tw-text-center tw-py-1 tw-hidden tw-w-32 ${
-                            isDemo
-                                ? '@phone:tw-table-cell'
-                                : 'tablet:tw-table-cell'
-                        }`}
+                        className={`tw-text-center tw-py-1 tw-px-2 tw-hidden @xl:tw-table-cell`}
                     >
-                        MODUS
+                        Modus
                     </th>
-                    <th className={`tw-text-center tw-py-1`}>TEAMS</th>
-                    <th className={`tw-text-center tw-py-1 tw-w-20`}>SÄTZE</th>
+                    {/* Text center for bigger screens */}
+                    <th
+                        className={`tw-text-left tw-py-1 tw-px-2 @lg:tw-text-center`}
+                    >
+                        Teams
+                    </th>
+                    <th className={`tw-text-center tw-py-1 tw-px-2`}>Sätze</th>
                     <th
                         colSpan={maxPlayedSets}
-                        className={`tw-text-left tw-py-1 tw-hidden tw-w-60 ${
-                            isDemo
-                                ? '@phone:tw-table-cell'
-                                : 'phone-sm:tw-table-cell'
-                        }`}
+                        className={`tw-text-left tw-py-1 tw-hidden @md:tw-table-cell`}
                     >
-                        PUNKTE
+                        Punkte
                     </th>
                 </tr>
             </thead>
@@ -72,7 +67,6 @@ export const ResultsTable = ({ teamId, isDemo }: TableProps) => {
                         dateUtc={result.dateUtc}
                         mode={result.mode}
                         maxPlayedSets={maxPlayedSets}
-                        isDemo={isDemo}
                     />
                 )
             })}
@@ -86,7 +80,6 @@ type TableRowProps = {
     dateUtc: string
     mode: string
     maxPlayedSets: number
-    isDemo: boolean
 }
 
 const ResultTableRow = ({
@@ -95,7 +88,6 @@ const ResultTableRow = ({
     dateUtc,
     mode,
     maxPlayedSets,
-    isDemo,
 }: TableRowProps) => {
     const [, short, shortDateTwoDigitYear] = useDateTransformer(dateUtc)
 
@@ -116,16 +108,16 @@ const ResultTableRow = ({
         >
             <tr>
                 <td rowSpan={2} className={`tw-text-center tw-py-1`}>
-                    <span className="tw-hidden phone:tw-inline">{short}</span>
-                    <span className="tw-inline phone:tw-hidden">
+                    <span className="tw-m-auto tw-hidden @sm:tw-inline">
+                        {short}
+                    </span>
+                    <span className="tw-m-auto @sm:tw-hidden">
                         {shortDateTwoDigitYear}
                     </span>
                 </td>
                 <td
                     rowSpan={2}
-                    className={`tw-text-center tw-py-1 tw-hidden ${
-                        isDemo ? '@phone:tw-table-cell' : 'tablet:tw-table-cell'
-                    }`}
+                    className={`tw-text-center tw-py-1 tw-hidden @xl:tw-table-cell`}
                 >
                     {mode}
                 </td>
@@ -134,7 +126,6 @@ const ResultTableRow = ({
                     caption={winner.caption}
                     setsWon={winner.setsWon}
                     sets={winnerSetObjects}
-                    isDemo={isDemo}
                 />
             </tr>
             <tr
@@ -145,7 +136,6 @@ const ResultTableRow = ({
                     caption={loser.caption}
                     setsWon={loser.setsWon}
                     sets={loserSetObjects}
-                    isDemo={isDemo}
                 />
             </tr>
         </tbody>
@@ -162,7 +152,6 @@ type TeamResultRowProps = {
     caption: string
     setsWon: number
     sets: Set[]
-    isDemo: boolean
 }
 
 const TeamResultRow = ({
@@ -170,26 +159,22 @@ const TeamResultRow = ({
     caption,
     setsWon,
     sets,
-    isDemo,
 }: TeamResultRowProps) => {
     return (
         <>
+            {/* Text center for bigger screens */}
             <td
-                className={`tw-text-center tw-pt-1 tw-px-2 phone:tw-px-5 tw-th-whitespace-nowrap tw-text-nowrap tw-min-w-fit`}
+                className={`tw-text-left tw-pt-1 tw-px-2 tw-truncate tw-text-nowrap @lg:tw-text-center`}
             >
                 {isWinner ? <strong>{caption}</strong> : caption}
             </td>
-            <td className={`tw-text-center tw-pt-1 tw-block tw-w-20`}>
+            <td className={`tw-text-center tw-pt-1`}>
                 {isWinner ? <strong>{setsWon}</strong> : setsWon}
             </td>
             {sets.map((set, index) => {
                 return (
                     <td
-                        className={`tw-text-left tw-pt-1 tw-px-2 tw-hidden ${
-                            isDemo
-                                ? '@phone:tw-table-cell'
-                                : 'phone-sm:tw-table-cell'
-                        }`}
+                        className={`tw-text-left tw-pt-1 tw-px-2 tw-hidden @md:tw-table-cell`}
                         key={index}
                     >
                         {set.won ? (

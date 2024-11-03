@@ -15,57 +15,57 @@ const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
 
 export default [
-  {
-    input: 'src/index.ts',
-    output: [
-      {
-        file: packageJson.main,
-        format: 'cjs',
-        sourcemap: false,
-      },
-      {
-        file: 'lib/tablehub.prod.min.js',
-        name: 'tablehub',
-        format: 'iife',
-        globals: {
-          'react': 'React',
-          'react-dom/client': 'ReactDOM'
-        },
-      },
-      {
-        file: packageJson.module,
-        format: 'esm',
-        sourcemap: false,
-      }
-    ],
-    plugins: [
-      peerDepsExternal(),
-      resolve(),
-      commonjs(),
-      typescript(),
-      terser(),
-      babel({
-        babelHelpers: 'bundled'
-      }),
-      postcss({
-        extensions: ['.css'],
-      }),
-    ],
-  },
-  {
-    input: 'lib/index.d.ts',
-    output: [{ file: 'lib/index.d.ts', format: 'es' }],
-    plugins: [dts()],
-    external: [/\.css$/],
-  },
-  {
-    input: "src/style.css",
-    output: [{ file: 'lib/index.css', format: 'es'}],
-    plugins: [
-        postcss({
-            extract: true,
-            minimize: true
-        })
-    ]
-  }
-];
+    {
+        input: 'src/index.ts',
+        output: [
+            {
+                file: packageJson.main,
+                format: 'cjs',
+                sourcemap: false,
+            },
+            {
+                file: 'lib/tablehub.prod.min.js',
+                name: 'tablehub',
+                format: 'iife',
+                globals: {
+                    react: 'React',
+                    'react-dom/client': 'ReactDOM',
+                },
+            },
+            {
+                file: packageJson.module,
+                format: 'esm',
+                sourcemap: false,
+            },
+        ],
+        plugins: [
+            peerDepsExternal(),
+            resolve(),
+            commonjs(),
+            typescript(),
+            terser(),
+            babel({
+                babelHelpers: 'bundled',
+            }),
+            postcss({
+                extensions: ['.css'],
+            }),
+        ],
+    },
+    {
+        input: 'lib/index.d.ts',
+        output: [{ file: packageJson.types, format: 'es' }],
+        plugins: [dts()],
+        external: [/\.css$/],
+    },
+    {
+        input: 'src/style.css',
+        output: [{ file: 'lib/index.css', format: 'es' }],
+        plugins: [
+            postcss({
+                extract: true,
+                minimize: true,
+            }),
+        ],
+    },
+]
