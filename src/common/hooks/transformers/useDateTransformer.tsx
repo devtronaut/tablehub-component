@@ -13,14 +13,14 @@ export const useDateTransformer = (
 
     const shortDate = date.toLocaleString(LOCALE, {
         year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
     })
 
     const shortDateTwoDigitYear = date.toLocaleString(LOCALE, {
         year: '2-digit',
-        month: 'numeric',
-        day: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
     })
 
     const time = date.toLocaleString(LOCALE, {

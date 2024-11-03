@@ -5,13 +5,14 @@
 ### **[Unreleased]**
 
 #### Added
-- None
+- Tablehub logo and link to the website at the top of all tables.
 
 #### Fixed
-- None
+- Wins row is not getting squished anymore on the Ranking table. Make table heading texts no-wrap.
 
 #### Updated
-- None
+- Responsiveness now with container queries instead of media queries for more flexibility.
+- Demotables and renderDemoTables not needed anymore since no decision between responsiveness methods has to be made.
 
 
 ## Change History
