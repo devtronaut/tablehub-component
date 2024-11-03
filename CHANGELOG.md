@@ -5,6 +5,20 @@
 ### **[Unreleased]**
 
 #### Added
+- None
+
+#### Fixed
+- None
+
+#### Updated
+- None
+
+
+## Change History
+
+### **[]**
+
+#### Added
 - Tablehub logo and link to the website at the top of all tables.
 
 #### Fixed
@@ -14,9 +28,7 @@
 - Responsiveness now with container queries instead of media queries for more flexibility.
 - Demotables and renderDemoTables not needed anymore since no decision between responsiveness methods has to be made.
 
-
-## Change History
-
+---
 ### **[v0.2.0]**
 
 #### Added
