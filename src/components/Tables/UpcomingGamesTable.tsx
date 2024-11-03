@@ -101,9 +101,9 @@ const GamesTableRow = ({
                     </span>
                     <span className={`@sm:tw-hidden`}>{shortTwoDigitYear}</span>
                 </div>
-                <div>
+                <div className="tw-flex tw-justify-center tw-gap-1">
                     <span>{time}</span>
-                    <span className="tw-hidden @sm:tw-inline">{' Uhr'}</span>
+                    <span className="tw-hidden @sm:tw-inline">{'Uhr'}</span>
                 </div>
             </td>
             <td
@@ -121,8 +121,8 @@ const GamesTableRow = ({
             <td
                 className={`tw-text-center tw-py-1 tw-hidden @xl:tw-table-cell`}
             >
-                <div>{mode}</div>
-                <div>{type}</div>
+                <div className="tw-w-full tw-text-center">{mode}</div>
+                <div className="tw-w-full tw-text-center">{type}</div>
             </td>
             <td
                 className={`tw-text-center tw-align-middle tw-py-1 tw-text-ellipsis`}
